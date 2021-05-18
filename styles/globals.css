@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'Nunito Sans', monospace;
+  src: url(fonts/Nunito_Sans/NunitoSans-Regular.ttf) format('truetype');
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Nunito Sans, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.tituloPage {
+	color: #d64a36;
+}
+.buttonGral {
+	background-color: rgb(214, 74, 54);
+}
+.modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: all 0.3s ease-in-out;
+	pointer-events: none;
+}
+.modal.show {
+	opacity: 1;
+	pointer-events: visible;
+}
+.modal-content {
+	width: 500px;
+	background-color: #fff;
+	border-radius: 3px;
+}
+
+.modal-header, .modal-footer {
+	padding: 10px;
+}
+
+.modal-title {
+	margin: 0;
+}
+.modal-body {
+	padding: 10px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
