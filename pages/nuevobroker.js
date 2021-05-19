@@ -36,15 +36,19 @@ const NuevoBroker = () => {
         update(cache, { data: { createBroker } }) {
             // Obtener objeto de cache que deseamos actualizar
             try {
-                const  { brokers } = cache.readQuery({ query: OBTENER_BROKERS });
-
-                // Reescribimos el cache (el cache nunca se debe modificar)
-                cache.writeQuery({
-                    query: OBTENER_BROKERS,
-                    data: {
-                        brokers : [...brokers, createBroker]
-                    }
-                })
+                 
+                const query = cache.readQuery({ query: OBTENER_BROKERS });
+                if(query)
+                {
+                    const  { brokers } = query;
+                    // Reescribimos el cache (el cache nunca se debe modificar)
+                    cache.writeQuery({
+                        query: OBTENER_BROKERS,
+                        data: {
+                            brokers : [...brokers, createBroker]
+                        }
+                    })
+                }
             } catch(error) {
                 console.log(error);
             }

@@ -5,7 +5,7 @@ import {
 	SELECCIONAR_BROKER
 } from '../../types'
 
-export default ( state, action ) => {
+const PropiedadReducer = ( state, action ) => {
 	switch(action.type) {
 		case SELECCIONAR_BROKER:
 			return {
@@ -16,3 +16,5 @@ export default ( state, action ) => {
 			return state
 	}
 }
+
+export default PropiedadReducer;
