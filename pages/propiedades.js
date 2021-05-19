@@ -1,25 +1,10 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Propiedad from '../components/Propiedad';
-import { useQuery, gql } from '@apollo/client';
 import Link from 'next/link';
+import { useQuery } from '@apollo/client';
+import { OBTENER_PROPIEDADES } from '../queries/Propiedades/Propiedades.ts';
 
-const OBTENER_PROPIEDADES = gql`
-  query properties {
-	  properties {
-	    id
-	    broker {
-	      	id
-	    	name
-	    }
-	    address
-	    latitude
-	    longitude
-	    price
-	    currency
-	  }
-	}
-`;
 
 const Propiedades = () => {
 	const { data, loading, error } = useQuery(OBTENER_PROPIEDADES);

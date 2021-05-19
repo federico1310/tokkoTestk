@@ -1,18 +1,9 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Broker from '../components/Broker';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Link from 'next/link';
-
-const OBTENER_BROKERS = gql`
-  query brokers {
-    brokers {
-      id
-      name
-      address
-    }
-  }
-`;
+import { OBTENER_BROKERS } from '../queries/Brokers/Brokers.ts';
 
 const Brokers = () => {
 

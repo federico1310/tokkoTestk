@@ -2,28 +2,9 @@ import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
-
-const NUEVO_BROKER = gql`
-    mutation createBroker($brokerInput: BrokerInput!) {
-      createBroker(brokerInput: $brokerInput) {
-        id
-        name
-        address
-      }
-    }
-`;
-
-const OBTENER_BROKERS = gql`
-  query brokers {
-    brokers {
-      id
-      name
-      address
-    }
-  }
-`;
+import { NUEVO_BROKER, OBTENER_BROKERS } from '../queries/Brokers/Brokers.ts';
 
 const NuevoBroker = () => {
 

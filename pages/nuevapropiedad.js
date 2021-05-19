@@ -3,44 +3,11 @@ import Layout from '../components/Layout';
 import AsignarBroker from '../components/propiedades/AsignarBroker';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import PropiedadContext from '../context/propiedades/PropiedadContext';
+import { OBTENER_PROPIEDADES, NUEVA_PROPIEDAD } from '../queries/Propiedades/Propiedades.ts';
 
-const NUEVA_PROPIEDAD = gql`
-    mutation createProperty($propertyInput: PropertyInput!) {
-      createProperty(propertyInput: $propertyInput) {
-        id
-        broker {
-          id
-          name
-          address
-        }
-        address
-        latitude
-        longitude
-        price
-        currency
-      }
-    }
-`;
-
-const OBTENER_PROPIEDADES = gql`
-    query properties {
-      properties {
-        id
-        broker {
-            id
-            name
-        }
-        address
-        latitude
-        longitude
-        price
-        currency
-      }
-    }
-`;
 
 const NuevoBroker = () => {
 
@@ -83,10 +50,10 @@ const NuevoBroker = () => {
     const formik = useFormik({
         initialValues: {
             address: '',
-            price: undefined,
-            currency: undefined,
-            latitude: undefined,
-            longitude: undefined
+            price: '',
+            currency: '',
+            latitude: '',
+            longitude: ''
         },
         validationSchema: Yup.object({
             address: Yup.string().required('La dirección de la propiedad es obligatoria')
@@ -105,7 +72,20 @@ const NuevoBroker = () => {
 
             const { address, price, currency, latitude, longitude} = valores;
             const { id: brokerId } = broker
-            
+
+            let sentPrice = price;
+            let sentCurrency = currency;
+            let sentLatitude = latitude;
+            let sentLongitude = longitude;
+            if(price === '') 
+                sentPrice = undefined;
+            if(currency === '') 
+                sentCurrency = undefined;
+            if(latitude === '') 
+                sentLatitude = undefined;
+            if(longitude === '') 
+                sentLongitude = undefined;   
+
             try {
 
                 const { data } = await createProperty({
@@ -113,10 +93,10 @@ const NuevoBroker = () => {
                         propertyInput: {
                             brokerId,
                             address,
-                            latitude,
-                            longitude,
-                            price,
-                            currency
+                            latitude: sentLatitude,
+                            longitude: sentLongitude,
+                            price: sentPrice,
+                            currency: sentCurrency
                         }
                     }
                 }) 

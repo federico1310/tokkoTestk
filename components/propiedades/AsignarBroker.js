@@ -1,17 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Select from 'react-select';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import PropiedadContext from '../../context/propiedades/PropiedadContext';
+import { OBTENER_BROKERS } from '../../queries/Brokers/Brokers.ts';
 
-const OBTENER_BROKERS = gql`
-  query brokers {
-    brokers {
-      id
-      name
-      address
-    }
-  }
-`;
 
 const AsignarBroker = () => {
 
